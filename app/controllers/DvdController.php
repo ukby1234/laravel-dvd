@@ -51,7 +51,7 @@ class DvdController extends BaseController {
   } 
   public function createDvd() {
     $title = Input::get('title');
-    $genre = Input::get('title');
+    $genre = Input::get('genre');
     $rating = Input::get('rating');
     $format = Input::get('format');
     $label = Input::get('label');
