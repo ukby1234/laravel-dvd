@@ -1,31 +1,39 @@
 <?php
-	class Dvd {
-		public static function getGenres() {
-			$query = DB::table('genres');
-			$genres = $query->get();
-			return $genres;
-		}
+class Dvd extends Eloquent{
+  public function format()
+  {
+    return $this->belongsTo('Format');
+  }
 
-		public static function getRatings() {
-			$query = DB::table('ratings');
-			$ratings = $query->get();
-			return $ratings;
-		}
+  public function genre()
+  {
+    return $this->belongsTo('Genre');
+  }
 
-		public static function getDvds($title, $genre, $rating) {
-			$query = DB::table('dvds')
-			->select('title', 'rating_name', 'genre_name', 'label_name', 'sound_name', 'format_name', DB::raw("DATE_FORMAT(release_date, '%b %d %Y %h:%i %p') AS release_date"))
-      		->join('genres', 'genres.id', '=', 'dvds.genre_id')
-      		->join('ratings', 'dvds.rating_id', '=', 'ratings.id')
-      		->join('formats', 'formats.id', '=', 'dvds.format_id')
-      		->join('sounds', 'dvds.sound_id', '=', 'sounds.id')
-      		->join('labels', 'dvds.label_id', '=', 'labels.id')
-      		->where('title', 'LIKE', "%$title%");
-      		if ($genre != 'All')
-      			$query = $query->where('genre_name', '=', $genre);
-      		if ($rating != 'All')
-      			$query = $query->where('rating_name', '=', $rating);
-      		return $query->get();
-		}
-	}
+  public function label()
+  {
+    return $this->belongsTo('Label');
+  }
+
+  public function rating()
+  {
+    return $this->belongsTo('Rating');
+  }
+
+  public function sound()
+  {
+    return $this->belongsTo('Sound');
+  }
+
+  public static function listDvds($title, $genre, $rating) {
+    $songs = Dvd::with(['genre', 'label', 'rating', 'sound', 'format'])
+            ->where('title', 'LIKE', "%$title%");
+    if ($genre != "All")
+      $songs = $songs->where('genre_id', '=', $genre);
+    if ($rating != "All") 
+      $songs = $songs->where('rating_id', '=', $rating);
+    return $songs->take(30)->get();
+  }
+
+}
 ?>

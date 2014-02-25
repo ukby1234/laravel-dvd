@@ -15,11 +15,11 @@
 <?php foreach($dvds as $dvd) : ?>
 	<div style="display: table-row;">
 	<div style="display: table-cell;"><?php echo $dvd->title;?></div>
-	<div style="display: table-cell;"><?php echo $dvd->rating_name;?></div>
-	<div style="display: table-cell;"><?php echo $dvd->genre_name;?></div>
-	<div style="display: table-cell;"><?php echo $dvd->label_name;?></div>
-	<div style="display: table-cell;"><?php echo $dvd->sound_name;?></div>
-	<div style="display: table-cell;"><?php echo $dvd->format_name;?></div>
+	<div style="display: table-cell;"><?php echo $dvd->rating->rating_name;?></div>
+	<div style="display: table-cell;"><?php echo $dvd->genre->genre_name;?></div>
+	<div style="display: table-cell;"><?php echo $dvd->label->label_name;?></div>
+	<div style="display: table-cell;"><?php echo $dvd->sound->sound_name;?></div>
+	<div style="display: table-cell;"><?php echo $dvd->format->format_name;?></div>
 	<div style="display: table-cell;"><?php echo $dvd->release_date;?></div>
 	</div>
 <?php endforeach; ?>

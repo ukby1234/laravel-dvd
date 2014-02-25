@@ -18,3 +18,6 @@ Route::get('/', function()
 
 Route::get('/dvds/search', 'DvdController@search');
 Route::get('/dvds', 'DvdController@listDvds');
+Route::get('/dvds/create', 'DvdController@create');
+Route::get('/genres/{id}/dvds', 'DvdController@listGenreDvd');
+Route::post('/dvds', 'DvdController@createDvd');
