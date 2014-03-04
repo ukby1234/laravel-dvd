@@ -35,5 +35,16 @@ class Dvd extends Eloquent{
     return $songs->take(30)->get();
   }
 
+  public static function validate($input) {
+    return Validator::make($input, [
+      'title' => 'required|alpha_num|min:3', 
+      'label' => 'required|numeric', 
+      'genre' => 'required|numeric', 
+      'sound' => 'required|numeric', 
+      'rating'=> 'required|numeric', 
+      'format'=> 'required|numeric'
+      ]);
+  }
+
 }
 ?>

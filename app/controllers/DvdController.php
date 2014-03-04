@@ -47,7 +47,7 @@ class DvdController extends BaseController {
       'formats' => $formats, 
       'labels' => $labels,
       'sounds' => $sounds
-    ]);
+      ]);
   } 
   public function createDvd() {
     $title = Input::get('title');
@@ -57,17 +57,22 @@ class DvdController extends BaseController {
     $label = Input::get('label');
     $sound = Input::get('sound');
     $release_date = Input::get('releast_date');
+    $validation = Dvd::validate(Input::all());
+
+    if ($validation->passes()) {
     //var_dump($genres);
-    $dvd = new Dvd();
-    $dvd->title = $title;
-    $dvd->genre_id = $genre;
-    $dvd->rating_id = $rating;
-    $dvd->format_id = $format;
-    $dvd->label_id = $label;
-    $dvd->sound_id = $sound;
-    $dvd->release_date = $release_date;
-    $dvd->save();
-    return Redirect::to('/dvds/create')->with('success', 'Successfully create a song. ');
+      $dvd = new Dvd();
+      $dvd->title = $title;
+      $dvd->genre_id = $genre;
+      $dvd->rating_id = $rating;
+      $dvd->format_id = $format;
+      $dvd->label_id = $label;
+      $dvd->sound_id = $sound;
+      $dvd->release_date = $release_date;
+      $dvd->save();
+      return Redirect::to('/dvds/create')->with('success', 'Successfully create a song. ');
+    }
+    return Redirect::to('/dvds/create')->withInput()->with('errors', $validation->messages());  
   } 
 }
 ?>

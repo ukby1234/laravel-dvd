@@ -21,3 +21,5 @@ Route::get('/dvds', 'DvdController@listDvds');
 Route::get('/dvds/create', 'DvdController@create');
 Route::get('/genres/{id}/dvds', 'DvdController@listGenreDvd');
 Route::post('/dvds', 'DvdController@createDvd');
+Route::get('/ifixit/search', 'iFixitController@search');
+Route::get('/ifixit/result', 'iFixitController@result');
