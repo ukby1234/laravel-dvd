@@ -4,8 +4,10 @@
     <title>iFixit Search</title>
 </head>
 <body>
-    <p> <?php echo $json->title; ?> </p>
+    <p> Title: <?php echo $json->title; ?> </p>
+    <p> Contents: </p>
     <?php echo $json->contents; ?>
+    <p> Guides: </p>
     <?php foreach ($json->guides as $guide): ?>
     <div>
     	<?php echo $guide->guideid; ?> </br>
