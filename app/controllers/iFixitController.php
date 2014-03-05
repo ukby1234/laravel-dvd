@@ -8,7 +8,9 @@
   	public function result() {
   		$ifixit = new \Itp\Api\iFixitSearch();
   		$json = $ifixit->getResults(Input::get('device'));
-    	return Response::json($json);
+    	return View::make('iFixitResult', [
+          'json' => $json
+        ]);
   	}
 	}
 ?>
